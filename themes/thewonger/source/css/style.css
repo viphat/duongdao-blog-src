@@ -614,3 +614,11 @@ nav a {
     margin-block-start: 0;
   }
 }
+
+.categories {
+	display: inline-block;
+}
+
+.categories .category:first-child {
+	margin-left: 5px;
+}
