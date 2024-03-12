@@ -45,11 +45,62 @@
     <%- css('css/style.css') %>
     <%- favicon_tag('images/favicon.png') %>
 
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&subset=vietnamese&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&subset=vietnamese&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
   </head>
   <body>
+    <%
+      var posts = site.posts.sort('-date').toArray();
+      var lastTenPosts = posts.slice(0, 10);
+    %>
+
+    <section class="mobile-nav-container">
+      <nav>
+        <div class="nav-links-container">
+          <div class="nav-links">
+            <a href="https://duongdao.family">Dương & Đào Family</a>
+            <a href="https://www.instagram.com/codao.vivian" class="instagram">Instagram</a>
+          </div>
+          <button href="#" class="nav-toggle" id="closeNav" style="cursor: pointer;">Return</button>
+        </div>
+        <div class="article-container">
+          <% posts.forEach(function(post) { %>
+            <div class="article">
+              <a href="<%= post.permalink %>"><%- post.title %></a>
+              <sub><%= date(post.date, 'YY-M-D') %></sub>
+            </div>
+          <% }); %>
+        </div>
+      </nav>
+      <div class="nav-functions">
+        <button class="mobile-toggle">Articles</button>
+        <button href="#" class="theme-toggle" onclick="modeSwitcher()" style="cursor: pointer;">Dark Mode</button>
+      </div>
+    </section>
+
+    <section class="desktop-nav-container">
+      <nav>
+        <div class="nav-links">
+          <a href="https://duongdao.family">Dương & Đào Family</a>
+          <a href="https://www.instagram.com/codao.vivian" class="instagram">Instagram</a>
+          <button href="#" class="theme-toggle" onclick="modeSwitcher()" style="cursor: pointer;">Dark Mode</button>
+        </div>
+        <div class="article-container desktop-article-container">
+          <% lastTenPosts.forEach(function(post) { %>
+            <div class="article">
+              <a href="<%= post.permalink %>"><%- truncate(post.title, { length: 40 }) %></a>
+              <sub><%= date(post.date, 'YY-M-D') %></sub>
+            </div>
+          <% }); %>
+        </div>
+        <hr>
+        <div class="all-posts">
+          <a href="/">View All Posts</a>
+          <sub><%= posts.length %></sub>
+        </div>
+      </nav>
+    </section>
     <%- body %>
     <%- js('js/highlight.js') %>
     <%- js('js/mobile-nav.js') %>
