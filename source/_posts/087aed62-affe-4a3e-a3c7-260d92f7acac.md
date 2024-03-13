@@ -7,7 +7,7 @@ categories:
   - Cảm
 ---
 
-![Untitled.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1c35bcdc-42a4-44e8-9d9c-01e2d858c279/3aef961b-e34d-440b-8fbd-44c77c8f8e1e/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45HZZMZUHI%2F20240313%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240313T024046Z&X-Amz-Expires=3600&X-Amz-Signature=5c1f49496aeb1308bcc997db457a6e55edafa86ccaf4e5806d7d5187cb31a764&X-Amz-SignedHeaders=host&x-id=GetObject)
+![Untitled.png](/images/087aed62-affe-4a3e-a3c7-260d92f7acac/Untitled.png)
 
 Có lẽ, Sài Gòn đã thương gia đình mình, những con người từ xứ sở cà phê xa xôi.
 
