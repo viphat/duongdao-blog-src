@@ -674,3 +674,16 @@ nav a {
 .main-content a {
 	text-decoration: none;
 }
+
+.logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	margin-block-end: 20px;
+}
+
+.logo img {
+	width: 240px;
+	height: 40px;
+}
