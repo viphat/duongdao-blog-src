@@ -380,8 +380,8 @@ nav a {
 
 .article sub {
 	display: block;
-	width: 48px;
-	min-width: 48px;
+	width: 60px;
+	min-width: 60px;
 	text-align: right;
 }
 

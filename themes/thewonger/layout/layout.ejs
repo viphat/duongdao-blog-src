@@ -68,7 +68,7 @@
           <% posts.forEach(function(post) { %>
             <div class="article">
               <a href="<%= post.permalink %>"><%- post.title %></a>
-              <sub><%= date(post.date, 'YY-M-D') %></sub>
+              <sub><%= date(post.date, 'YYYY-MM-DD') %></sub>
             </div>
           <% }); %>
         </div>
@@ -90,7 +90,7 @@
           <% lastTenPosts.forEach(function(post) { %>
             <div class="article">
               <a href="<%= post.permalink %>"><%- post.title %></a>
-              <sub><%= date(post.date, 'YY-M-D') %></sub>
+              <sub><%= date(post.date, 'YYYY-MM-DD') %></sub>
             </div>
           <% }); %>
         </div>

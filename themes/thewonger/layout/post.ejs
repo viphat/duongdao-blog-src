@@ -1,7 +1,7 @@
 <section class="post-layout">
   <div class="post-header">
     <h1><%= page.title %></h1>
-    <sub>Viết bởi <%= page.author %> vào <%= date(page.date, 'YY-M-D') %></sub>
+    <sub>Viết bởi <%= page.author %> vào <%= date(page.date, 'YYYY-MM-DD') %></sub>
     <div class="categories-container">
       <span>Chủ đề: </span>
       <%  var firstCategory = page.categories.toArray()[0]; %>
