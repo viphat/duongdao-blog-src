@@ -1,0 +1,10 @@
+<div class="all-posts-body">
+  <h1>All Posts</h1>
+  <% var posts = site.posts.sort('-date').toArray(); %>
+  <% posts.forEach(function(post) { %>
+    <div class="article">
+      <a href="<%= post.permalink %>"><%= post.title %></a>
+      <sub><%= date(post.date, 'YY-M-D') %></sub>
+    </div>
+  <% }); %>
+</div>

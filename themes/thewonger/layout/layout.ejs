@@ -82,21 +82,21 @@
     <section class="desktop-nav-container">
       <nav>
         <div class="nav-links">
-          <a href="https://duongdao.family">Dương & Đào Family</a>
+          <a href="<%= url_for('/') %>">Dương & Đào Family</a>
           <a href="https://www.instagram.com/codao.vivian" class="instagram">Instagram</a>
           <button href="#" class="theme-toggle" onclick="modeSwitcher()" style="cursor: pointer;">Dark Mode</button>
         </div>
         <div class="article-container desktop-article-container">
           <% lastTenPosts.forEach(function(post) { %>
             <div class="article">
-              <a href="<%= post.permalink %>"><%- truncate(post.title, { length: 40 }) %></a>
+              <a href="<%= post.permalink %>"><%- post.title %></a>
               <sub><%= date(post.date, 'YY-M-D') %></sub>
             </div>
           <% }); %>
         </div>
         <hr>
         <div class="all-posts">
-          <a href="/">View All Posts</a>
+          <a href="<%= url_for('/archives') %>">View All Posts</a>
           <sub><%= posts.length %></sub>
         </div>
       </nav>

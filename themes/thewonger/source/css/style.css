@@ -108,6 +108,10 @@ html[data-theme="dark"] {
 	--secondary-background-color: #efefef;
 	--filter: invert(15%) sepia(0%) saturate(1257%) hue-rotate(143deg) brightness(91%) contrast(83%);
   }
+
+	.card {
+    box-shadow: 0 2px 5px rgba(255,255,255,0.1); /* Lighter shadow for dark mode for contrast */
+  }
 }
 
 html {
@@ -377,6 +381,8 @@ nav a {
 .article sub {
 	display: block;
 	width: 48px;
+	min-width: 48px;
+	text-align: right;
 }
 
 .pagination {
@@ -621,4 +627,50 @@ nav a {
 
 .categories .category:first-child {
 	margin-left: 5px;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Creates a responsive grid */
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--secondary-background-color); /* Use secondary background color for border */
+  background-color: var(--main-background-color); /* Main background color */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Default shadow for light mode */
+  color: var(--main-text-color); /* Main text color */
+}
+
+.card h2 {
+  font-size: 20px;
+  margin: 0;
+  padding: 15px;
+  background-color: var(--secondary-background-color); /* Secondary background for header */
+  color: var(--link-color); /* Use link color variable for header text */
+  border-bottom: 1px solid var(--secondary-text-color); /* Use secondary text color for border */
+}
+
+.card .thumbnail {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card p {
+  padding: 15px;
+  margin: 0;
+  font-size: 16px;
+  color: var(--secondary-text-color); /* Secondary text color for paragraph */
+  flex-grow: 1;
+  display: flex; /* Makes the paragraph a flex container */
+  flex-direction: column; /* Ensures the content is aligned vertically */
+  justify-content: space-around; /* Distributes space around the content */
+}
+
+.main-content a {
+	text-decoration: none;
 }

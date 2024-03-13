@@ -1,10 +1,71 @@
 <div class="all-posts-body">
-  <h1>All Posts</h1>
-  <% var posts = site.posts.sort('-date').toArray(); %>
-  <% posts.forEach(function(post) { %>
-    <div class="article">
-      <a href="<%= post.permalink %>"><%= post.title %></a>
-      <sub><%= date(post.date, 'YY-M-D') %></sub>
-    </div>
-  <% }); %>
+  <h1>Blog Dương & Đào Family</h1>
+
+  <div class="main-content">
+      <div class="card">
+        <a href="<%- url_for('/categories/ghi-voi') %>">
+          <h2>Ghi Vội</h2>
+          <img src="<%- full_url_for('images/ghi-voi.png') %>" alt="Ghi Vội" class="thumbnail">
+          <p>Chuyên mục này tập hợp những dòng suy nghĩ, ý tưởng, tâm tư thoáng qua, được Phát và Vy ghi nhanh lại. Tiện cho việc nhìn lại chính mình hay tập hợp trở thành bài viết hoàn chỉnh vào một ngày đẹp trời.</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="<%- url_for('/categories/Di') %>">
+          <h2>Đi</h2>
+          <img src="<%- full_url_for('images/di.png') %>" alt="Đi" class="thumbnail">
+          <p>Nơi lưu lại những cuộc hành trình cùng nhau của Dương Đào Family</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="<%- url_for('/categories/Kiwi-corner') %>">
+          <h2>Kiwi's Corner</h2>
+          <img src="<%- full_url_for('images/Kiwi-corner.png') %>" alt="Kiwi's Corner" class="thumbnail">
+          <p>[?] Gọi là Kiwi's Corner vì mình vô tình tìm ra tên Dương Đào còn có ý nghĩa là trái Kiwi đó.</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="<%- url_for('/categories/Phat-trien-ban-than') %>">
+          <h2>Phát triển bản thân</h2>
+          <img src="<%- full_url_for('images/Phat-trien-ban-than.png') %>" alt="Phát triển bản thân" class="thumbnail">
+          <p>Dương Đào Family luôn nhận thức được rằng việc phát triển bản thân luôn là điều quan trọng dù ở đâu hay trong việc gì. Bởi vậy tụi mình luôn cố gắng để tiến bộ hơn, trưởng thành hơn trong công việc, trong tình yêu, trong quan điểm về tiền bạc hay lối sống và phát triển theo xu hướng bền vững, chậm mà chắc. Hi vọng sẽ lan toả được những điều tích cực đến các bạn.</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="<%- url_for('/categories/Lam') %>">
+          <h2>Làm</h2>
+          <img src="<%- full_url_for('images/Lam.jpeg') %>" alt="Làm" class="thumbnail">
+          <p>Nơi chia sẻ những trải nghiệm và góc nhìn của tụi mình về chuyện đi làm, đồng thời qua đó tìm cách phát triển bản thân cả trong cuộc sống và công việc.</p>
+        </a>
+      </div>
+
+
+      <div class="card">
+        <a href="<%- url_for('/categories/Sang-tac') %>">
+          <h2>Sáng tác</h2>
+          <img src="<%- full_url_for('images/Sang-tac.png') %>" alt="Sáng tác" class="thumbnail">
+          <p>Những sáng tác của Cô Đào và thuộc quyền sở hữu của Dương Đào Family. Xin vui lòng liên hệ tác giả nếu bạn có nhã ý muốn chia sẻ. Xin cảm ơn.</p>
+        </a>
+      </div>
+
+
+      <div class="card">
+        <a href="<%- url_for('/categories/Kiwi-cinema') %>">
+          <h2>Kiwi cinema</h2>
+          <img src="<%- full_url_for('images/Kiwi-cinema.png') %>" alt="Kiwi cinema" class="thumbnail">
+          <p>Cùng xem phim và nghe nhạc chất lượng với Dương Đào Family nhé!</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="<%- url_for('/categories/Kiwi-cinema') %>">
+          <h2>Cảm nghiệm</h2>
+          <img src="<%- full_url_for('images/cam-nghiem.png') %>" alt="Cảm nghiệm" class="thumbnail">
+          <p>Mọi thứ mà chúng ta học, đọc, đi, làm, trải nghiệm trong đời sống này cuối cùng cũng để chiêm nghiệm ra một điều gì đó phục vụ lại cho cuộc sống của ta. Khiến ta trở thành một người tốt hơn, đẹp hơn, thông thái hơn, tinh tế ý nhị hơn, cảm xúc hơn. Nơi đây chứa những bài viết như thế, về những điều mà chúng mình cảm nghiệm nhằm tốt cho mình, đẹp cho đời.</p>
+        </a>
+      </div>
+  </div>
 </div>
