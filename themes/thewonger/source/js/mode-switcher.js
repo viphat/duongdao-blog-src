@@ -51,7 +51,7 @@ if (theme === "dark") {
     document.documentElement.setAttribute('data-theme', 'dark');
     sessionStorage.setItem('theme', 'dark');
     setThemeToggleText("Light Mode");
-} else if (theme === "light") {
+} else if (theme === "light" || theme === null) {
     document.documentElement.setAttribute('data-theme', 'light');
     sessionStorage.setItem('theme', 'light');
     setThemeToggleText("Dark Mode");
