@@ -175,26 +175,26 @@ iframe {
 
 h1 {
 	color: var(--link-color);
-	font-weight: 500;
+	font-weight: 700;
 	margin-block-end: 2rem;
-	font-size: 1.2rem;
+	font-size: 1.4rem;
 	letter-spacing: -.015em;
 }
 
 h2 {
 	color: var(--link-color);
-	font-weight: 500;
+	font-weight: 600;
 	margin-block-start: 1rem;
 	margin-block-end: .75rem;
-	font-size: 1.1rem;
+	font-size: 1.3rem;
 	letter-spacing: -.0125em;
 }
 
 h3 {
 	color: var(--link-color);
-	font-weight: 500;
+	font-weight: 600;
 	margin-block-start: .5rem;
-	margin-block-end: 1rem;
+	margin-block-end: 1.2rem;
 	letter-spacing: -.01em;
 }
 
@@ -222,6 +222,24 @@ li {
 	margin-bottom: 1rem;
 	line-height: 1.575;
 	letter-spacing: -.01em;
+}
+
+table {
+	align-self: flex-start;
+}
+
+table td {
+	border: 1px solid var(--main-text-color);
+	padding: 1px;
+}
+
+table th {
+	padding: 1px;
+}
+
+ul, ol {
+  margin-top: 20px;
+	margin-bottom: 10px;
 }
 
 blockquote {
@@ -466,6 +484,7 @@ nav a {
 	background-color: var(--main-background-color);
 	border-radius: var(--border-radius);
 	color: var(--link-color);
+	align-self: flex-start;
 }
 
 .return-link {
