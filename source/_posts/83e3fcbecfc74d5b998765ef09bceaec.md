@@ -4,7 +4,7 @@ permalink: su-quan-trong-cua-tro-tu-trong-tieng-nhat/
 date: 2024-08-23
 author: Ông Già Coder EB
 categories:
-  - Học
+  - Tiếng Nhật
 ---
 
 ## Sự quan trọng của Trợ từ trong tiếng Nhật
