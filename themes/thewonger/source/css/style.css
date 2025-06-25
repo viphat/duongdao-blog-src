@@ -707,3 +707,130 @@ nav a {
 	width: 240px;
 	height: 40px;
 }
+
+/* Featured Posts Section Styles */
+.featured-section {
+  margin-bottom: 2rem;
+}
+
+.featured-section h1 {
+  color: var(--link-color);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: -.015em;
+}
+
+.featured-section p {
+  color: var(--main-text-color);
+  margin-bottom: 1.5rem;
+  line-height: 1.575;
+  letter-spacing: -.01em;
+}
+
+.featured-section a {
+  color: var(--link-color);
+  text-decoration: underline;
+  letter-spacing: -.01em;
+}
+
+.featured-section a:hover {
+  cursor: pointer;
+}
+
+.featured-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: var(--gutter-m);
+  margin-bottom: var(--spacing-m);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .featured-posts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featured-post-card {
+  border: 1px solid var(--main-text-color);
+  background-color: var(--main-background-color);
+  border-radius: var(--border-radius);
+  transition: border 0.2s ease;
+}
+
+.featured-post-card:hover {
+  border: 1px solid var(--link-color);
+}
+
+.featured-post-card a {
+  display: block;
+  padding: var(--spacing-sm);
+  text-decoration: none;
+  color: inherit;
+}
+
+.featured-post-title {
+  color: var(--link-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+  letter-spacing: -.01em;
+}
+
+.featured-post-meta {
+  color: var(--main-text-color);
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-bottom: var(--spacing-xsm);
+  letter-spacing: -.01em;
+}
+
+.featured-post-meta span {
+  margin-right: var(--spacing-sm);
+}
+
+.featured-post-excerpt {
+  color: var(--main-text-color);
+  line-height: 1.575;
+  margin-bottom: var(--spacing-xsm);
+  letter-spacing: -.01em;
+}
+
+.featured-post-readmore {
+  color: var(--link-color);
+  font-weight: 400;
+  font-size: 0.9rem;
+  letter-spacing: -.01em;
+}
+
+.featured-category-link {
+  margin-top: var(--spacing-m);
+	margin-bottom: var(--spacing-m);
+}
+
+.featured-category-button {
+  font-family: var(--sans-serif-font);
+  font-size: 1rem;
+  background: transparent;
+  border: 1px solid var(--main-text-color);
+  border-radius: var(--border-radius);
+  color: var(--nav-link-color);
+  padding: 0 var(--spacing-sm);
+  margin: 0;
+  height: 40px;
+  width: fit-content;
+  letter-spacing: -.01em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease;
+}
+
+.featured-category-button:hover {
+  border-color: var(--link-color);
+  cursor: pointer;
+  text-decoration: none;
+}

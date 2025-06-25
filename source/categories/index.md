@@ -1,0 +1,105 @@
+---
+title: Chuyên mục
+date: 2025-06-25 16:22:22
+layout: page
+---
+
+<div class="all-posts-body">
+  <div class="main-content">
+      <div class="card">
+        <a href="/categories/Song">
+          <h2>Sống</h2>
+          <img src="/images/ghi-voi.png" alt="Sống" class="thumbnail">
+          <p>Chuyên mục này tập hợp những dòng suy nghĩ, ý tưởng, tâm tư thoáng qua, được Phát và Vy ghi nhanh lại. Tiện cho việc nhìn lại chính mình hay tập hợp trở thành bài viết hoàn chỉnh vào một ngày đẹp trời.</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/categories/Di">
+          <h2>Đi</h2>
+          <img src="/images/di.png" alt="Đi" class="thumbnail">
+          <p>Nơi lưu lại những cuộc hành trình cùng nhau của Dương Đào Family</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/categories/Cam">
+          <h2>Cảm</h2>
+          <img src="/images/cam-nghiem.png" alt="Cảm" class="thumbnail">
+          <p>Mọi thứ mà chúng ta học, đọc, đi, làm, trải nghiệm trong đời sống này cuối cùng cũng để chiêm nghiệm ra một điều gì đó phục vụ lại cho cuộc sống của ta. Khiến ta trở thành một người tốt hơn, đẹp hơn, thông thái hơn, tinh tế ý nhị hơn, cảm xúc hơn. Nơi đây chứa những bài viết như thế, về những điều mà chúng mình cảm nghiệm nhằm tốt cho mình, đẹp cho đời.</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/categories/Cuoc-song-o-Nhat">
+          <h2>Cuộc sống ở Nhật</h2>
+          <img src="/images/cuoc-song-o-nhat.jpg" alt="Cuộc sống ở Nhật" class="thumbnail">
+          <p>Chia sẻ mọi thứ mà chúng mình ghi lại về trải nghiệm của gia đình Dương Đào với cuộc sống tại Nhật.</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/categories/Hoc">
+          <h2>Học</h2>
+          <img src="/images/Phat-trien-ban-than.png" alt="Học" class="thumbnail">
+          <p>Gia đình Dương Đào luôn nhận thức được rằng việc phát triển bản thân luôn là điều quan trọng dù ở đâu hay trong việc gì. Việc Đọc và việc Học chắc chắn là một thứ không thể thiếu trong hành trình hoàn thiện con người. Bởi vậy tụi mình luôn cố gắng để tiến bộ hơn, trưởng thành hơn trong công việc, trong tình yêu, trong quan điểm về tiền bạc hay lối sống và phát triển theo xu hướng bền vững, chậm mà chắc. Hi vọng sẽ lan toả được những điều tích cực đến các bạn.</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/categories/Tieng-Nhat">
+          <h2>Tiếng Nhật</h2>
+          <img src="/images/tieng-nhat.jpg" alt="Tiếng Nhật" class="thumbnail">
+          <p>Chia sẻ về những lượm lặt và tổng kết của chúng mình trên con đường chinh phục tiếng Nhật.</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/categories/Viet">
+          <h2>Viết</h2>
+          <img src="/images/Sang-tac.png" alt="Viết" class="thumbnail">
+          <p>Những sáng tác của Cô Đào và thuộc quyền sở hữu của Dương Đào Family. Xin vui lòng liên hệ tác giả nếu bạn có nhã ý muốn chia sẻ. Xin cảm ơn.</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/categories/Nghi">
+          <h2>Nghĩ</h2>
+          <img src="/images/nghi.jpg" alt="Nghĩ" class="thumbnail">
+          <p>Chuyên mục tập hợp những tìm tòi, khám phá, học hỏi, tư duy của gia đình Dương & Đào, các mảng như Tài chính cá nhân, tư duy cầu tiến, Hiệu suất...</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/categories/Lam">
+          <h2>Làm</h2>
+          <img src="/images/Lam.jpeg" alt="Làm" class="thumbnail">
+          <p>Nơi chia sẻ những trải nghiệm và góc nhìn của tụi mình về chuyện đi làm, đồng thời qua đó tìm cách phát triển bản thân cả trong cuộc sống và công việc.</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/categories/Yeu">
+          <h2>Yêu</h2>
+          <img src="/images/Mua-yeu.png" alt="Yêu" class="thumbnail">
+          <p>Những ký ức tuổi thơ nhiều màu sắc, những nỗi niềm thương nhớ về gia đình, và những người xuất hiện trong cuộc đời tôi, để lại trong tôi nhiều kỷ niệm.</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/categories/Kiwi-cinema">
+          <h2>Kiwi cinema</h2>
+          <img src="/images/Kiwi-cinema.png" alt="Kiwi cinema" class="thumbnail">
+          <p>Cùng xem phim và nghe nhạc chất lượng với Dương Đào Family nhé!</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/categories/Kiwi-s-Corner/">
+          <h2>Kiwi's Corner</h2>
+          <img src="/images/Kiwi-corner.png" alt="Kiwi's Corner" class="thumbnail">
+          <p>[?] Gọi là Kiwi's Corner vì mình vô tình tìm ra tên Dương Đào còn có ý nghĩa là trái Kiwi đó.</p>
+        </a>
+      </div>
+  </div>
+</div>
