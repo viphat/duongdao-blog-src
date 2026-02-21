@@ -718,7 +718,8 @@ img[src*="#background"] {
 @media (min-width: 1200px) {
   body {
     display: grid;
-    grid-template-columns: 320px minmax(0, 1fr);
+    grid-template-columns: 320px minmax(680px, 900px);
+    justify-content: center;
     align-items: start;
     gap: var(--space-5);
     padding: var(--space-5);
