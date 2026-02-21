@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="light">
+<html lang="vi">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -38,16 +38,14 @@
       <title><%= config.title %></title>
     <% } %>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:description" content="<%= config.description %>" />
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="<%= config.description %>" />
 
     <%- css('css/style.css') %>
     <%- favicon_tag('images/favicon.png') %>
 
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&subset=vietnamese&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&subset=vietnamese&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
   <body>
     <%
@@ -75,7 +73,6 @@
       </nav>
       <div class="nav-functions">
         <button class="mobile-toggle">Articles</button>
-        <button href="#" class="theme-toggle" onclick="modeSwitcher()" style="cursor: pointer;">Dark Mode</button>
       </div>
     </section>
 
@@ -84,7 +81,6 @@
         <div class="nav-links">
           <a href="<%= url_for('/') %>">Dương & Đào Family</a>
           <a href="<%= url_for('/categories') %>">Chuyên mục</a>
-          <button href="#" class="theme-toggle" onclick="modeSwitcher()" style="cursor: pointer;">Dark Mode</button>
         </div>
         <div class="article-container desktop-article-container">
           <% lastTenPosts.forEach(function(post) { %>
@@ -104,7 +100,6 @@
     <%- body %>
     <%- js('js/highlight.js') %>
     <%- js('js/mobile-nav.js') %>
-    <%- js('js/mode-switcher.js') %>
     <script async data-id="101465897" src="//static.getclicky.com/js"></script>
   </body>
 </html>
