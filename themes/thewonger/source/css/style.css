@@ -126,11 +126,11 @@ table {
   --font-sans: "Be Vietnam Pro", "Noto Sans", "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", "Source Code Pro", monospace;
 
-  --bg: #1e1e1e;
-  --surface: #252526;
-  --surface-elevated: #2d2d30;
-  --surface-soft: #303033;
-  --border: #3e3e42;
+  --bg: #0f1524;
+  --surface: #1f2937;
+  --surface-elevated: #253247;
+  --surface-soft: #2a3650;
+  --border: rgba(156, 170, 196, 0.22);
 
   --text: #d4d4d4;
   --text-muted: #9da1a6;
@@ -162,7 +162,9 @@ html {
 
 body {
   min-height: 100%;
-  background: radial-gradient(circle at top right, #252526 0%, #1e1e1e 52%), linear-gradient(180deg, #1e1e1e 0%, #1b1b1c 100%);
+  background:
+    radial-gradient(1000px circle at 85% -10%, rgba(86, 156, 214, 0.15), transparent 45%),
+    linear-gradient(180deg, #162033 0%, #0f1524 100%);
   color: var(--text);
   font-family: var(--font-sans);
   line-height: 1.76;
