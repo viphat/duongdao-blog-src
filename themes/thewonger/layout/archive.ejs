@@ -1,10 +1,48 @@
-<div class="all-posts-body">
-  <h1>All Posts</h1>
-  <% var posts = site.posts.sort('-date').toArray(); %>
-  <% posts.forEach(function(post) { %>
-    <div class="article">
-      <a href="<%= post.permalink %>"><%= post.title %></a>
-      <sub><%= date(post.date, 'YYYY-MM-DD') %></sub>
-    </div>
-  <% }); %>
-</div>
+<%
+  var posts = page.posts ? page.posts.sort("-date").toArray() : site.posts.sort("-date").toArray();
+  var years = {};
+
+  posts.forEach(function(post) {
+    var year = date(post.date, "YYYY");
+    if (!years[year]) years[year] = [];
+    years[year].push(post);
+  });
+
+  var yearKeys = Object.keys(years).sort(function(a, b) { return b - a; });
+%>
+
+<section class="grid gap-10">
+  <header class="max-w-3xl border-b border-line pb-8">
+    <p class="text-sm font-semibold uppercase text-leaf">Lưu trữ</p>
+    <h1 class="mt-4 text-4xl font800 leading-tight text-ink md:text-5xl">Tất cả bài viết</h1>
+    <p class="mt-5 text-base leading-8 text-muted"><%= posts.length %> bài viết được giữ lại theo thời gian.</p>
+  </header>
+
+  <div class="grid gap-10">
+    <% yearKeys.forEach(function(year) { %>
+      <section class="grid gap-5 md:grid-cols-[120px_minmax(0,1fr)]">
+        <h2 class="text-2xl font800 text-ink"><%= year %></h2>
+        <div class="divide-y divide-line border-y border-line">
+          <% years[year].forEach(function(post) { %>
+            <article>
+              <a href="<%= post.permalink %>" class="group grid gap-2 py-5 no-underline md:grid-cols-[88px_minmax(0,1fr)]">
+                <time class="text-sm text-muted" datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'DD/MM') %></time>
+                <div>
+                  <h3 class="text-lg font700 leading-7 text-ink group-hover:text-leaf"><%- post.title %></h3>
+                  <p class="mt-2 text-sm text-muted">
+                    <% if (post.author) { %><%= post.author %><% } %>
+                    <% if (post.categories && post.categories.length) { %>
+                      <% post.categories.forEach(function(category, index) { %>
+                        <%= (post.author || index > 0) ? " · " : "" %><%= category.name %>
+                      <% }); %>
+                    <% } %>
+                  </p>
+                </div>
+              </a>
+            </article>
+          <% }); %>
+        </div>
+      </section>
+    <% }); %>
+  </div>
+</section>

@@ -1,60 +1,147 @@
-<div class="all-posts-body">
-  <!-- <h1 class="logo">
-    <img src="<%- url_for('/images/logo.png') %>" alt="Blog Dương Đào Family" class="logo">
-  </h1> -->
+<%
+  var posts = page.posts ? page.posts.toArray() : site.posts.sort("-date").toArray();
+  var latestPost = posts[0];
+  var remainingPosts = posts.slice(1);
+  var categories = site.categories.sort("name").toArray().filter(function(category) {
+    return category.path.split("/").filter(Boolean).length === 2;
+  });
 
-  <div class="main-content">
-    <!-- Featured Category Section -->
-    <div class="featured-section">
-      <h1>Hôm nay tôi học được gì?</h1>
-      <p>Today I learned...</p>
+  function plainExcerpt(content, length) {
+    if (!content) return "";
+    var text = content
+      .replace(/<script[\s\S]*?<\/script>/gi, "")
+      .replace(/<style[\s\S]*?<\/style>/gi, "")
+      .replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    return text.length > length ? text.substring(0, length).trim() + "..." : text;
+  }
 
-      <div class="featured-category-link">
-        <a href="<%- url_for('/categories/Hoc') %>" class="featured-category-button">
-          Xem tất cả bài viết về Học
+  function firstImage(content) {
+    if (!content) return null;
+    var match = content.match(/<img[^>]+src=["']([^"']+)["']/i);
+    return match ? match[1] : null;
+  }
+
+  function categoryNames(post) {
+    return post.categories ? post.categories.toArray().map(function(category) { return category.name; }).join(" / ") : "";
+  }
+%>
+
+<section class="grid gap-12">
+  <div class="grid gap-8 border-b border-line pb-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold uppercase text-leaf">Hôm nay tôi học được gì?</p>
+      <h1 class="mt-4 max-w-3xl text-4xl font800 leading-tight text-ink md:text-6xl">
+        Những ghi chép chậm rãi của Dương & Đào.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-muted">
+        Học, sống, đi, nghĩ, làm, yêu. Viết lại để nhớ, để hiểu mình hơn, và để có thứ quay về đọc cùng nhau.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="<%= url_for('/categories') %>" class="inline-flex min-h-11 items-center rounded-lg bg-ink px-5 text-sm font-semibold text-white no-underline transition hover:bg-leaf">
+          Đọc theo chuyên mục
+        </a>
+        <a href="<%= url_for('/archives') %>" class="inline-flex min-h-11 items-center rounded-lg border border-line px-5 text-sm font-semibold text-ink no-underline transition hover:border-ink">
+          Xem tất cả bài viết
         </a>
       </div>
-
-      <p><a href="<%- url_for('/categories') %>">Xem tất cả chuyên mục →</a></p>
     </div>
 
-    <%
-      // Get posts from the "Học" category, sorted by date, limit to 6 posts
-      var hocPosts = site.categories.findOne({name: 'Học'});
-      var featuredPosts = hocPosts ? hocPosts.posts.sort('-date').limit(6).toArray() : [];
+    <div class="flex aspect-[4/3] flex-col items-center justify-center rounded-lg border border-line bg-white px-8 text-center shadow-lift">
+      <img src="<%- url_for('/images/kiwi-flaticon.png') %>" alt="" class="h-20 w-20 object-contain" loading="eager" />
+      <p class="mt-5 whitespace-nowrap text-base font800 leading-6 text-ink">Dương & Đào Family</p>
+      <p class="mt-1 whitespace-nowrap text-[10px] leading-4 text-muted">Nhật ký gia đình, học hỏi và những chuyến đi</p>
+      <div class="mt-7 h-px w-full bg-line"></div>
+      <div class="mt-4 flex items-center justify-center gap-6 text-[10px] font700 text-leaf">
+        <span>Sống</span>
+        <span>Học</span>
+        <span>Đi</span>
+        <span>Yêu</span>
+      </div>
+    </div>
+  </div>
 
-      // Function to create excerpt
-      function createExcerpt(content) {
-        if (!content) return '';
-        var plainText = content.replace(/<[^>]*>/g, ''); // Remove HTML tags
-        return plainText.length > 250 ? plainText.substring(0, 250) + '...' : plainText;
-      }
-    %>
+  <% if (latestPost) { %>
+    <section class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
+      <article class="border-b border-line pb-8 lg:border-b-0 lg:border-r lg:pr-8">
+        <a href="<%= latestPost.permalink %>" class="group grid gap-6 no-underline md:grid-cols-[220px_minmax(0,1fr)]">
+          <%
+            var latestImage = firstImage(latestPost.content) || url_for('/images/brand-card.svg');
+          %>
+          <img src="<%- latestImage %>" alt="" class="aspect-[4/3] w-full rounded-lg object-cover" loading="lazy" />
+          <div>
+            <p class="text-sm font-semibold uppercase text-muted">Mới nhất</p>
+            <h2 class="mt-3 text-2xl font800 leading-tight text-ink group-hover:text-leaf md:text-3xl">
+              <%- latestPost.title %>
+            </h2>
+            <p class="mt-3 text-sm text-muted">
+              <%= date(latestPost.date, 'DD/MM/YYYY') %>
+              <% if (latestPost.author) { %> · <%= latestPost.author %><% } %>
+              <% if (categoryNames(latestPost)) { %> · <%= categoryNames(latestPost) %><% } %>
+            </p>
+            <p class="mt-5 text-base leading-8 text-muted">
+              <%= plainExcerpt(latestPost.content, 260) %>
+            </p>
+            <span class="mt-5 inline-flex text-sm font-semibold text-leaf">Đọc tiếp</span>
+          </div>
+        </a>
+      </article>
 
-    <% if (featuredPosts && featuredPosts.length > 0) { %>
-      <div class="featured-posts-grid">
-        <% featuredPosts.forEach(function(post) { %>
-          <div class="featured-post-card">
-            <a href="<%= post.permalink %>">
-              <h3 class="featured-post-title">
-                <%- post.title %>
-              </h3>
-              <div class="featured-post-meta">
-                <span><%- date(post.date, 'DD/MM/YYYY') %></span>
-                <% if (post.author) { %>
-                  <span>Tác giả: <%= post.author %></span>
-                <% } %>
-              </div>
-              <p class="featured-post-excerpt">
-                <%= createExcerpt(post.content) %>
-              </p>
-              <div class="featured-post-readmore">
-                Đọc tiếp →
+      <aside>
+        <p class="text-sm font-semibold uppercase text-muted">Chuyên mục</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <% categories.slice(0, 12).forEach(function(category) { %>
+            <a href="<%= url_for(category.path) %>" class="rounded-lg border border-line px-3 py-2 text-sm font-semibold text-ink no-underline transition hover:border-leaf hover:text-leaf">
+              <%= category.name %>
+            </a>
+          <% }); %>
+        </div>
+      </aside>
+    </section>
+  <% } %>
+
+  <% if (remainingPosts.length) { %>
+    <section>
+      <div class="mb-6 flex items-end justify-between gap-4">
+        <div>
+          <p class="text-sm font-semibold uppercase text-muted">Bài viết</p>
+          <h2 class="mt-2 text-2xl font800 text-ink">Đọc gần đây</h2>
+        </div>
+        <a href="<%= url_for('/archives') %>" class="hidden text-sm font-semibold text-leaf no-underline md:inline">Tất cả</a>
+      </div>
+
+      <div class="divide-y divide-line border-y border-line">
+        <% remainingPosts.slice(0, 9).forEach(function(post) { %>
+          <article>
+            <a href="<%= post.permalink %>" class="group grid gap-3 py-6 no-underline md:grid-cols-[140px_minmax(0,1fr)]">
+              <time class="text-sm text-muted" datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'DD/MM/YYYY') %></time>
+              <div>
+                <h3 class="text-xl font700 leading-8 text-ink group-hover:text-leaf"><%- post.title %></h3>
+                <p class="mt-2 text-sm leading-7 text-muted"><%= plainExcerpt(post.content, 190) %></p>
+                <p class="mt-3 text-xs font-semibold uppercase text-muted">
+                  <% if (post.author) { %><%= post.author %><% } %>
+                  <% if (categoryNames(post)) { %><% if (post.author) { %> · <% } %><%= categoryNames(post) %><% } %>
+                </p>
               </div>
             </a>
-          </div>
+          </article>
         <% }); %>
       </div>
-    <% } %>
-  </div>
-</div>
+    </section>
+  <% } %>
+
+  <% if (page.total && page.total > 1) { %>
+    <nav class="flex items-center justify-between gap-4" aria-label="Phân trang">
+      <% if (page.prev) { %>
+        <a href="<%= url_for(page.prev_link) %>" class="rounded-lg border border-line px-4 py-3 text-sm font-semibold text-ink no-underline hover:border-ink">Trang mới hơn</a>
+      <% } else { %>
+        <span></span>
+      <% } %>
+      <span class="text-sm text-muted">Trang <%= page.current %> / <%= page.total %></span>
+      <% if (page.next) { %>
+        <a href="<%= url_for(page.next_link) %>" class="rounded-lg border border-line px-4 py-3 text-sm font-semibold text-ink no-underline hover:border-ink">Trang cũ hơn</a>
+      <% } %>
+    </nav>
+  <% } %>
+</section>

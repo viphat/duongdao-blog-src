@@ -1,16 +1,24 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var nav = document.querySelector('nav'); // Selects the <nav> element
-    var toggleButton = document.querySelector('.mobile-toggle'); // Selects the toggle button outside nav
-    var closeButton = document.getElementById('closeNav'); // Selects the new close button inside nav
+document.addEventListener("DOMContentLoaded", function () {
+  var toggle = document.querySelector("[data-menu-toggle]");
+  var menu = document.getElementById("mobile-menu");
 
-    // Function to toggle the navigation visibility
-    function toggleNav() {
-        nav.classList.toggle('active');
-    }
+  if (!toggle || !menu) return;
 
-    // Event listener for the external toggle button
-    toggleButton.addEventListener('click', toggleNav);
+  toggle.addEventListener("click", function () {
+    var isOpen = !menu.classList.contains("hidden");
+    menu.classList.toggle("hidden", isOpen);
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+  });
 
-    // Event listener for the close button inside the navigation
-    closeButton.addEventListener('click', toggleNav);
+  menu.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      menu.classList.add("hidden");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  document.querySelectorAll(".content-prose img").forEach(function (image) {
+    if (!image.hasAttribute("loading")) image.setAttribute("loading", "lazy");
+    if (!image.hasAttribute("decoding")) image.setAttribute("decoding", "async");
+  });
 });

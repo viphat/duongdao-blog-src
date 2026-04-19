@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Dương &amp; Đào Family</title>
+  <desc id="desc">A clean brand card with kiwi icon by Marz Gallery on Flaticon and Dương &amp; Đào Family wordmark.</desc>
+  <rect width="1200" height="675" rx="28" fill="#ffffff"/>
+  <image href="kiwi-flaticon.png" x="480" y="126" width="240" height="240" preserveAspectRatio="xMidYMid meet"/>
+  <text x="600" y="420" text-anchor="middle" fill="#171717" font-family="Be Vietnam Pro, Inter, Arial, sans-serif" font-size="50" font-weight="800">Dương &amp; Đào Family</text>
+  <text x="600" y="462" text-anchor="middle" fill="#666666" font-family="Be Vietnam Pro, Inter, Arial, sans-serif" font-size="22" font-weight="500">Nhật ký gia đình, học hỏi và những chuyến đi</text>
+  <path d="M132 512h936" stroke="#e5e5e5" stroke-width="2"/>
+  <g fill="#16835f" font-family="Be Vietnam Pro, Inter, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">
+    <text x="474" y="558">Sống</text>
+    <text x="555" y="558">Học</text>
+    <text x="632" y="558">Đi</text>
+    <text x="709" y="558">Yêu</text>
+  </g>
+</svg>
