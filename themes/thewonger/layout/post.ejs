@@ -38,32 +38,36 @@
     <%- page.content %>
   </div>
 
-  <section class="comments-shell mt-14 border-t border-line pt-8" data-comments-section>
-    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+  <section class="comments-shell mt-14 border-t border-line pt-8 text-ink" data-comments-section>
+    <div class="comments-head flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
       <div>
-        <h2 class="text-2xl font800 leading-8 text-ink">Bình luận</h2>
+        <h2 class="text-2xl font800 leading-8 text-ink md:text-3xl">Bình luận</h2>
         <p class="mt-2 text-sm leading-6 text-muted" data-comments-status>Đang tải bình luận...</p>
       </div>
-      <button type="button" class="comments-author-button" data-comments-author-toggle>Chế độ tác giả</button>
+      <button type="button" class="comments-author-button inline-flex min-h-[42px] items-center justify-center rounded-lg border border-line bg-white px-4 text-sm font700 leading-none text-ink transition hover:border-leaf hover:text-leaf" data-comments-author-toggle>Chế độ tác giả</button>
     </div>
 
-    <div class="comments-list mt-6" data-comments-list></div>
+    <div class="comments-list mt-6 grid gap-4" data-comments-list></div>
 
-    <form class="comments-form mt-8" data-comments-form>
-      <div class="comments-honeypot" aria-hidden="true">
+    <form class="comments-form mt-8 grid gap-4 rounded-lg border border-line bg-white p-5" data-comments-form>
+      <div class="comments-honeypot" aria-hidden="true" hidden>
         <label for="comment-website">Website</label>
         <input id="comment-website" name="website" type="text" tabindex="-1" autocomplete="off" />
       </div>
 
-      <label class="comments-label" for="comment-name">Tên của bạn</label>
-      <input id="comment-name" class="comments-input" name="name" type="text" maxlength="80" autocomplete="name" required />
+      <div class="comments-field grid gap-2">
+        <label class="comments-label block text-sm font800 text-ink" for="comment-name">Tên của bạn</label>
+        <input id="comment-name" class="comments-input block min-h-[46px] w-full rounded-lg border border-line bg-white px-3 py-2 text-base leading-6 text-ink outline-none transition focus:border-leaf focus:ring-4 focus:ring-[#16835f24]" name="name" type="text" maxlength="80" autocomplete="name" required />
+      </div>
 
-      <label class="comments-label mt-4" for="comment-body">Bình luận</label>
-      <textarea id="comment-body" class="comments-textarea" name="body" maxlength="2000" rows="5" required></textarea>
+      <div class="comments-field grid gap-2">
+        <label class="comments-label block text-sm font800 text-ink" for="comment-body">Bình luận</label>
+        <textarea id="comment-body" class="comments-textarea block min-h-36 w-full resize-y rounded-lg border border-line bg-white px-3 py-2 text-base leading-7 text-ink outline-none transition focus:border-leaf focus:ring-4 focus:ring-[#16835f24]" name="body" maxlength="2000" rows="5" required></textarea>
+      </div>
 
-      <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p class="text-sm leading-6 text-muted">Bình luận sẽ hiển thị sau khi tác giả duyệt.</p>
-        <button type="submit" class="comments-submit">Gửi bình luận</button>
+      <div class="comments-form-footer flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p class="m-0 text-sm leading-6 text-muted">Bình luận sẽ hiển thị sau khi tác giả duyệt.</p>
+        <button type="submit" class="comments-submit inline-flex min-h-[42px] items-center justify-center rounded-lg border border-leaf bg-leaf px-4 text-sm font700 leading-none text-white transition hover:bg-[#11684b]">Gửi bình luận</button>
       </div>
     </form>
   </section>

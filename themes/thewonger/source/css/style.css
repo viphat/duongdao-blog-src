@@ -259,11 +259,17 @@ img[src*="#background"] {
   color: #242424;
 }
 
+.comments-head {
+  gap: 1rem;
+}
+
 .comments-author-button,
 .comments-submit,
 .comment-action {
   align-items: center;
+  appearance: none;
   border-radius: 8px;
+  cursor: pointer;
   display: inline-flex;
   font-weight: 700;
   justify-content: center;
@@ -277,7 +283,9 @@ img[src*="#background"] {
   border: 1px solid #e5e5e5;
   color: #171717;
   font-size: 0.875rem;
+  line-height: 1;
   padding: 0 1rem;
+  white-space: nowrap;
 }
 
 .comments-author-button:hover,
@@ -298,6 +306,7 @@ img[src*="#background"] {
   font-size: 0.95rem;
   line-height: 1.7;
   padding: 1rem;
+  text-align: left;
 }
 
 .comment-item {
@@ -392,9 +401,17 @@ img[src*="#background"] {
 }
 
 .comments-form {
-  border: 1px solid #e5e5e5;
+  background: #ffffff;
+  border: 1px solid #d8d8d8;
   border-radius: 8px;
-  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.comments-field {
+  display: grid;
+  gap: 0.45rem;
 }
 
 .comments-label {
@@ -411,7 +428,9 @@ img[src*="#background"] {
   color: #171717;
   display: block;
   font: inherit;
-  margin-top: 0.45rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
   padding: 0.8rem 0.9rem;
   width: 100%;
 }
@@ -428,12 +447,27 @@ img[src*="#background"] {
   resize: vertical;
 }
 
+.comments-form-footer {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.comments-form-footer p {
+  color: #666666;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
 .comments-submit {
   background: #16835f;
   border: 1px solid #16835f;
   color: #ffffff;
   font-size: 0.9rem;
   padding: 0 1rem;
+  white-space: nowrap;
 }
 
 .comments-submit:hover,
@@ -443,6 +477,7 @@ img[src*="#background"] {
 }
 
 .comments-honeypot {
+  display: none !important;
   left: -9999px;
   position: absolute;
   top: auto;
@@ -450,6 +485,14 @@ img[src*="#background"] {
 
 .comments-status-error {
   color: #b33d5a !important;
+}
+
+.comments-status-link {
+  color: #16835f;
+  font-weight: 800;
+  margin-left: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
 }
 
 .comment-reply-form {
@@ -471,6 +514,25 @@ img[src*="#background"] {
 
   .content-prose h2 {
     font-size: 1.35rem;
+  }
+
+  .comments-author-button,
+  .comments-submit {
+    width: 100%;
+  }
+
+  .comments-form {
+    padding: 1rem;
+  }
+
+  .comments-form-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .comment-time {
+    margin-left: 0;
+    width: 100%;
   }
 }
 

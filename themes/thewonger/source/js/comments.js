@@ -38,6 +38,27 @@
     status.classList.toggle("comments-status-error", Boolean(isError));
   }
 
+  function setAuthorSignInStatus() {
+    if (!status) return;
+
+    status.textContent = "";
+    status.classList.add("comments-status-error");
+    status.appendChild(document.createTextNode("Cần đăng nhập Cloudflare Access để duyệt và trả lời."));
+
+    var link = document.createElement("a");
+    link.className = "comments-status-link font800 text-leaf underline underline-offset-2";
+    link.href = authorSignInUrl();
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = "Đăng nhập";
+    status.appendChild(document.createTextNode(" "));
+    status.appendChild(link);
+  }
+
+  function authorSignInUrl() {
+    return new URL(endpoint("/author?path=") + encodeURIComponent(path), window.location.origin).href;
+  }
+
   function requestJson(url, options) {
     return fetch(url, options || {}).then(function (response) {
       return response.text().then(function (text) {
@@ -93,7 +114,7 @@
         authorMode = false;
         section.classList.remove("comments-author-mode");
         if (authorToggle) authorToggle.textContent = "Chế độ tác giả";
-        setStatus("Cần đăng nhập Cloudflare Access để duyệt và trả lời.", true);
+        setAuthorSignInStatus();
       })
       .finally(function () {
         pendingAuthorLoad = false;
@@ -127,7 +148,7 @@
 
     if (!comments.length) {
       var empty = document.createElement("p");
-      empty.className = "comments-empty";
+      empty.className = "comments-empty rounded-lg border border-line p-4 text-sm leading-7 text-muted";
       empty.textContent = withControls ? "Chưa có bình luận nào cho bài viết này." : "Hãy là người đầu tiên để lại bình luận.";
       list.appendChild(empty);
       return;
@@ -140,40 +161,40 @@
 
   function renderComment(comment, withControls) {
     var item = document.createElement("article");
-    item.className = "comment-item";
+    item.className = "comment-item rounded-lg border border-line p-4";
     item.dataset.commentId = comment.id;
     item.dataset.status = comment.status || "approved";
 
     var header = document.createElement("div");
-    header.className = "comment-header";
+    header.className = "comment-header flex flex-wrap items-center gap-2";
 
     var name = document.createElement("strong");
-    name.className = "comment-name";
+    name.className = "comment-name text-sm font800 text-ink";
     name.textContent = comment.displayName || "Ẩn danh";
     header.appendChild(name);
 
     if (comment.authorType === "author") {
       var badge = document.createElement("span");
-      badge.className = "comment-badge";
+      badge.className = "comment-badge rounded-full bg-[#e8f3ef] px-2 py-1 text-xs font800 leading-none text-leaf";
       badge.textContent = "Tác giả";
       header.appendChild(badge);
     }
 
     if (withControls && comment.status) {
       var statusBadge = document.createElement("span");
-      statusBadge.className = "comment-status-badge";
+      statusBadge.className = "comment-status-badge rounded-full bg-mist px-2 py-1 text-xs font800 leading-none text-muted";
       statusBadge.textContent = statusLabel(comment.status);
       header.appendChild(statusBadge);
     }
 
     var time = document.createElement("time");
-    time.className = "comment-time";
+    time.className = "comment-time text-xs text-muted sm:ml-auto";
     time.dateTime = comment.createdAt || "";
     time.textContent = formatDate(comment.createdAt);
     header.appendChild(time);
 
     var content = document.createElement("p");
-    content.className = "comment-body";
+    content.className = "comment-body mt-3 whitespace-pre-wrap text-base leading-7 text-ink";
     content.textContent = comment.body || "";
 
     item.appendChild(header);
@@ -185,7 +206,7 @@
 
     if (comment.replies && comment.replies.length) {
       var replies = document.createElement("div");
-      replies.className = "comment-replies";
+      replies.className = "comment-replies mt-4 grid gap-3 border-l-2 border-line pl-4";
       comment.replies.forEach(function (reply) {
         replies.appendChild(renderComment(reply, withControls));
       });
@@ -197,7 +218,7 @@
 
   function renderControls(comment) {
     var controls = document.createElement("div");
-    controls.className = "comment-controls";
+    controls.className = "comment-controls mt-4 flex flex-wrap items-center gap-2";
 
     if (comment.status !== "approved") {
       controls.appendChild(actionButton("Duyệt", function () {
@@ -221,7 +242,7 @@
   function actionButton(label, onClick) {
     var button = document.createElement("button");
     button.type = "button";
-    button.className = "comment-action";
+    button.className = "comment-action inline-flex min-h-9 items-center justify-center rounded-lg border border-line bg-white px-3 text-xs font700 text-ink transition hover:border-leaf hover:text-leaf";
     button.textContent = label;
     button.addEventListener("click", onClick);
     return button;
@@ -235,18 +256,18 @@
     }
 
     var replyForm = document.createElement("form");
-    replyForm.className = "comment-reply-form";
+    replyForm.className = "comment-reply-form mt-3 grid w-full gap-3";
     replyForm.dataset.commentReplyForm = "true";
 
     var textarea = document.createElement("textarea");
-    textarea.className = "comments-textarea";
+    textarea.className = "comments-textarea block min-h-28 w-full resize-y rounded-lg border border-line bg-white px-3 py-2 text-base leading-7 text-ink outline-none transition focus:border-leaf focus:ring-4 focus:ring-[#16835f24]";
     textarea.rows = 3;
     textarea.maxLength = 2000;
     textarea.required = true;
 
     var submit = document.createElement("button");
     submit.type = "submit";
-    submit.className = "comments-submit";
+    submit.className = "comments-submit inline-flex min-h-[42px] items-center justify-center rounded-lg border border-leaf bg-leaf px-4 text-sm font700 leading-none text-white transition hover:bg-[#11684b]";
     submit.textContent = "Gửi trả lời";
 
     replyForm.appendChild(textarea);
