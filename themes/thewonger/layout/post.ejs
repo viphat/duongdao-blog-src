@@ -29,12 +29,44 @@
         <span aria-hidden="true">·</span>
       <% } %>
       <time datetime="<%= date(page.date, 'YYYY-MM-DD') %>"><%= date(page.date, 'DD/MM/YYYY') %></time>
+      <span aria-hidden="true">·</span>
+      <span data-post-page-views aria-live="polite">Đang tải lượt xem...</span>
     </div>
   </header>
 
   <div class="content-prose mt-10">
     <%- page.content %>
   </div>
+
+  <section class="comments-shell mt-14 border-t border-line pt-8" data-comments-section>
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h2 class="text-2xl font800 leading-8 text-ink">Bình luận</h2>
+        <p class="mt-2 text-sm leading-6 text-muted" data-comments-status>Đang tải bình luận...</p>
+      </div>
+      <button type="button" class="comments-author-button" data-comments-author-toggle>Chế độ tác giả</button>
+    </div>
+
+    <div class="comments-list mt-6" data-comments-list></div>
+
+    <form class="comments-form mt-8" data-comments-form>
+      <div class="comments-honeypot" aria-hidden="true">
+        <label for="comment-website">Website</label>
+        <input id="comment-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <label class="comments-label" for="comment-name">Tên của bạn</label>
+      <input id="comment-name" class="comments-input" name="name" type="text" maxlength="80" autocomplete="name" required />
+
+      <label class="comments-label mt-4" for="comment-body">Bình luận</label>
+      <textarea id="comment-body" class="comments-textarea" name="body" maxlength="2000" rows="5" required></textarea>
+
+      <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-sm leading-6 text-muted">Bình luận sẽ hiển thị sau khi tác giả duyệt.</p>
+        <button type="submit" class="comments-submit">Gửi bình luận</button>
+      </div>
+    </form>
+  </section>
 
   <% if (morePosts.length) { %>
     <aside class="mt-14 border-t border-line pt-8">

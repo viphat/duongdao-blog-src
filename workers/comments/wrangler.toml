@@ -1,0 +1,12 @@
+name = "duongdao-comments"
+main = "src/index.js"
+compatibility_date = "2026-05-06"
+workers_dev = false
+preview_urls = false
+
+routes = [
+  { pattern = "duongdao.family/api/comments*", zone_name = "duongdao.family" }
+]
+
+[vars]
+ALLOWED_ORIGIN = "https://duongdao.family"

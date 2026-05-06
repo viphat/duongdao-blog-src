@@ -1,0 +1,6 @@
+name = "duongdao-analytics"
+main = "src/index.js"
+compatibility_date = "2026-05-05"
+
+[vars]
+ALLOWED_ORIGIN = "https://duongdao.family"

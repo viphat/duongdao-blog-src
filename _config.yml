@@ -100,6 +100,14 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: thewonger
 
+# Turso-backed page view counters served by a Cloudflare Worker.
+analytics:
+  api_base: /api/analytics
+
+# Turso-backed comments served by a separate Cloudflare Worker.
+comments:
+  api_base: /api/comments
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:

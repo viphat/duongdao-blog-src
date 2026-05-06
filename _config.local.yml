@@ -1,2 +1,6 @@
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: http://localhost:4000
+analytics:
+  api_base: http://localhost:8787/api/analytics
+comments:
+  api_base: http://localhost:8788/api/comments

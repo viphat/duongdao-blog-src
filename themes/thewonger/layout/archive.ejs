@@ -1,5 +1,13 @@
 <%
-  var posts = page.posts ? page.posts.sort("-date").toArray() : site.posts.sort("-date").toArray();
+  var allPosts = site.posts ? site.posts.sort("-date").toArray() : [];
+  var posts = page.posts ? page.posts.sort("-date").toArray() : allPosts;
+  var archivePosts = allPosts.filter(function(post) {
+    if (page.year && post.date.year() !== page.year) return false;
+    if (page.month && post.date.month() + 1 !== page.month) return false;
+    if (page.day && post.date.date() !== page.day) return false;
+    return true;
+  });
+  var totalPosts = archivePosts.length || posts.length;
   var years = {};
 
   posts.forEach(function(post) {
@@ -15,7 +23,7 @@
   <header class="max-w-3xl border-b border-line pb-8">
     <p class="text-sm font-semibold uppercase text-leaf">Lưu trữ</p>
     <h1 class="mt-4 text-4xl font800 leading-tight text-ink md:text-5xl">Tất cả bài viết</h1>
-    <p class="mt-5 text-base leading-8 text-muted"><%= posts.length %> bài viết được giữ lại theo thời gian.</p>
+    <p class="mt-5 text-base leading-8 text-muted"><%= totalPosts %> bài viết được giữ lại theo thời gian.</p>
   </header>
 
   <div class="grid gap-10">
@@ -45,4 +53,18 @@
       </section>
     <% }); %>
   </div>
+
+  <% if (page.total && page.total > 1) { %>
+    <nav class="flex items-center justify-between gap-4" aria-label="Phân trang">
+      <% if (page.prev) { %>
+        <a href="<%= url_for(page.prev_link) %>" class="rounded-lg border border-line px-4 py-3 text-sm font-semibold text-ink no-underline hover:border-ink">Trang mới hơn</a>
+      <% } else { %>
+        <span></span>
+      <% } %>
+      <span class="text-sm text-muted">Trang <%= page.current %> / <%= page.total %></span>
+      <% if (page.next) { %>
+        <a href="<%= url_for(page.next_link) %>" class="rounded-lg border border-line px-4 py-3 text-sm font-semibold text-ink no-underline hover:border-ink">Trang cũ hơn</a>
+      <% } %>
+    </nav>
+  <% } %>
 </section>
