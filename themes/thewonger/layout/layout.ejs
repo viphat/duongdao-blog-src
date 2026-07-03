@@ -80,7 +80,11 @@
     </a>
 
     <header class="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
-      <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5 md:px-8">
+      <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <%- partial('_partial/sprig', { className: "absolute -right-4 -top-6 h-20 w-32 rotate-180 opacity-45" }) %>
+        <%- partial('_partial/sprig', { className: "absolute left-[38%] -top-8 hidden h-16 w-28 rotate-180 opacity-30 lg:block" }) %>
+      </div>
+      <div class="relative mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5 md:px-8">
         <a href="<%= url_for('/') %>" class="group inline-flex items-center gap-3 text-ink no-underline">
           <span class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-moss ring-1 ring-line">
             <img src="<%- url_for('/images/kiwi-flaticon.png') %>" alt="Blog Dương Đào Family" class="h-8 w-8 object-contain" />
@@ -117,6 +121,7 @@
 
     <footer class="relative overflow-hidden border-t border-line bg-moss/70">
       <%- partial('_partial/sprig', { className: "pointer-events-none absolute -right-6 -top-8 h-36 w-52 opacity-50 md:h-44 md:w-64" }) %>
+      <%- partial('_partial/sprig', { className: "pointer-events-none absolute -left-8 -top-6 hidden h-32 w-48 -scale-x-100 opacity-40 sm:block" }) %>
       <div class="relative mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-[1.2fr_1fr] md:px-8">
         <div>
           <p class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-leaf">
@@ -153,6 +158,15 @@
           Kiwi icon by
           <a class="font-semibold text-muted underline underline-offset-2" href="https://www.flaticon.com/free-icon/kiwi_6498542" target="_blank" rel="noopener">Marz Gallery - Flaticon</a>.
         </p>
+      </div>
+
+      <div class="pointer-events-none relative mx-auto -mt-6 flex max-w-6xl items-end justify-between px-5 md:px-8" aria-hidden="true">
+        <%- partial('_partial/tree', { className: "h-16 w-14 opacity-75" }) %>
+        <%- partial('_partial/sprig', { className: "hidden h-10 w-16 opacity-60 sm:block" }) %>
+        <%- partial('_partial/tree', { className: "h-24 w-20 opacity-90" }) %>
+        <%- partial('_partial/sprig', { className: "hidden h-12 w-20 -scale-x-100 opacity-60 md:block" }) %>
+        <%- partial('_partial/tree', { className: "hidden h-14 w-12 opacity-75 sm:block" }) %>
+        <%- partial('_partial/tree', { className: "hidden h-20 w-16 opacity-85 lg:block" }) %>
       </div>
     </footer>
 
