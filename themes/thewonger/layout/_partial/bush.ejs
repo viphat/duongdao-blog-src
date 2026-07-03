@@ -1,0 +1,55 @@
+<%
+  // Lush watercolor bush: stems are quadratic beziers [x0,y0, cx,cy, x1,y1]
+  // rising from a common base, each dressed with alternating leaves.
+  var stems = [
+    [112, 252, 88, 150, 30, 58],
+    [112, 252, 106, 130, 92, 20],
+    [112, 252, 126, 140, 150, 30],
+    [112, 252, 142, 165, 192, 70],
+    [112, 252, 80, 205, 26, 148],
+    [112, 252, 148, 208, 198, 152],
+    [112, 252, 112, 180, 118, 116]
+  ];
+  var palette = ["#a9c398", "#8fb083", "#bcd3a8", "#cfe0bd", "#7fa574", "#9dbb8f"];
+
+  function qPoint(p, t) {
+    var mt = 1 - t;
+    return {
+      x: mt * mt * p[0] + 2 * mt * t * p[2] + t * t * p[4],
+      y: mt * mt * p[1] + 2 * mt * t * p[3] + t * t * p[5]
+    };
+  }
+
+  function qAngle(p, t) {
+    var dx = 2 * (1 - t) * (p[2] - p[0]) + 2 * t * (p[4] - p[2]);
+    var dy = 2 * (1 - t) * (p[3] - p[1]) + 2 * t * (p[5] - p[3]);
+    return Math.atan2(dy, dx) * 180 / Math.PI;
+  }
+%>
+<svg viewBox="0 0 220 260" fill="none" xmlns="http://www.w3.org/2000/svg" class="<%= typeof className !== 'undefined' ? className : '' %>" aria-hidden="true" focusable="false">
+  <% stems.forEach(function(p, si) { %>
+    <path d="M<%= p[0] %> <%= p[1] %> Q <%= p[2] %> <%= p[3] %>, <%= p[4] %> <%= p[5] %>" stroke="<%= si % 2 === 0 ? '#7c9b72' : '#6f9270' %>" stroke-width="2" stroke-linecap="round" />
+    <% for (var i = 1; i <= 10; i++) {
+         var t = 0.08 + i * 0.09;
+         var pt = qPoint(p, t);
+         var ang = qAngle(p, t);
+         var scale = 1.35 - 0.6 * t;
+         var fill = palette[(si + i) % palette.length];
+         var opacity = 0.72 + ((si + i) % 3) * 0.09;
+         var sides = (i % 2 === 0) ? [52, -52] : [(i % 3 === 0 ? -46 : 46)];
+         sides.forEach(function(side, k) {
+    %>
+      <g transform="translate(<%= pt.x.toFixed(1) %> <%= pt.y.toFixed(1) %>) rotate(<%= (ang + side).toFixed(1) %>) scale(<%= (scale - k * 0.12).toFixed(2) %>)">
+        <path d="M0 0 C 9 -11, 24 -13, 34 -4 C 25 8, 10 9, 0 0 Z" fill="<%= k === 0 ? fill : palette[(si + i + 3) % palette.length] %>" opacity="<%= opacity.toFixed(2) %>" />
+      </g>
+    <% }); } %>
+    <%
+      var tip = qPoint(p, 0.98);
+      var tipRot = qAngle(p, 0.98);
+      var tipFill = palette[si % palette.length];
+    %>
+    <g transform="translate(<%= tip.x.toFixed(1) %> <%= tip.y.toFixed(1) %>) rotate(<%= tipRot.toFixed(1) %>) scale(0.55)">
+      <path d="M0 0 C 9 -11, 24 -13, 34 -4 C 25 8, 10 9, 0 0 Z" fill="<%= tipFill %>" opacity="0.9" />
+    </g>
+  <% }); %>
+</svg>
