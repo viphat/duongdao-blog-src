@@ -26,73 +26,131 @@
   function categoryNames(post) {
     return post.categories ? post.categories.toArray().map(function(category) { return category.name; }).join(" / ") : "";
   }
+
+  function readingTime(content) {
+    if (!content) return 1;
+    var text = content
+      .replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    var words = text ? text.split(" ").length : 0;
+    return Math.max(1, Math.ceil(words / 220));
+  }
 %>
 
 <section class="grid gap-12">
-  <div class="grid gap-8 border-b border-line pb-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
-    <div class="max-w-3xl">
-      <p class="text-sm font-semibold uppercase text-leaf">Hôm nay tôi học được gì?</p>
-      <h1 class="mt-4 max-w-3xl text-4xl font800 leading-tight text-ink md:text-6xl">
-        Những ghi chép chậm rãi của Dương & Đào.
-      </h1>
-      <p class="mt-6 max-w-2xl text-lg leading-8 text-muted">
-        Học, sống, đi, nghĩ, làm, yêu. Viết lại để nhớ, để hiểu mình hơn, và để có thứ quay về đọc cùng nhau.
-      </p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="<%= url_for('/categories') %>" class="inline-flex min-h-11 items-center rounded-lg bg-ink px-5 text-sm font-semibold text-white no-underline transition hover:bg-leaf">
-          Đọc theo chuyên mục
-        </a>
-        <a href="<%= url_for('/archives') %>" class="inline-flex min-h-11 items-center rounded-lg border border-line px-5 text-sm font-semibold text-ink no-underline transition hover:border-ink">
-          Xem tất cả bài viết
-        </a>
-      </div>
-    </div>
+  <section class="relative overflow-hidden rounded-[28px] border border-line bg-card shadow-lift">
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-moss via-card to-cream" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -left-16 -top-16 h-56 w-56 rounded-full bg-[#cfe0bd] opacity-40 blur-3xl" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -bottom-20 right-24 h-64 w-64 rounded-full bg-[#e8dfbe] opacity-40 blur-3xl" aria-hidden="true"></div>
+    <%- partial('_partial/sprig', { className: "pointer-events-none absolute -left-4 bottom-1 h-20 w-32 -scale-x-100 opacity-50 md:h-36 md:w-52 md:opacity-80" }) %>
+    <%- partial('_partial/sprig', { className: "pointer-events-none absolute -right-5 -top-4 h-28 w-40 rotate-180 opacity-70 md:h-36 md:w-52" }) %>
 
-    <div class="flex aspect-[4/3] flex-col items-center justify-center rounded-lg border border-line bg-white px-8 text-center shadow-lift">
-      <img src="<%- url_for('/images/kiwi-flaticon.png') %>" alt="" class="h-20 w-20 object-contain" loading="eager" />
-      <p class="mt-5 whitespace-nowrap text-base font800 leading-6 text-ink">Dương & Đào Family</p>
-      <p class="mt-1 whitespace-nowrap text-[10px] leading-4 text-muted">Nhật ký gia đình, học hỏi và những chuyến đi</p>
-      <div class="mt-7 h-px w-full bg-line"></div>
-      <div class="mt-4 flex items-center justify-center gap-6 text-[10px] font700 text-leaf">
-        <span>Sống</span>
-        <span>Học</span>
-        <span>Đi</span>
-        <span>Yêu</span>
+    <div class="relative grid gap-8 p-8 md:grid-cols-[minmax(0,1fr)_230px] md:items-center md:p-12">
+      <div class="max-w-2xl">
+        <p class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-leaf">
+          <%- partial('_partial/leaf', { className: "h-4 w-4" }) %>
+          Nhật ký của Dương &amp; Đào
+        </p>
+        <h1 class="mt-4 font-display text-4xl font-semibold leading-tight text-ink md:text-5xl" data-greeting>
+          Chào bạn ghé chơi 🌿
+        </h1>
+        <p class="mt-5 max-w-xl text-lg leading-8 text-muted" data-greeting-sub>
+          Chậm lại một chút, chọn một bài để đọc cùng nhau nhé.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="<%= url_for('/categories') %>" class="inline-flex min-h-11 items-center rounded-full bg-leaf px-6 text-sm font-semibold text-white no-underline shadow-leafy transition hover:bg-pine">
+            Đọc theo chuyên mục
+          </a>
+          <a href="<%= url_for('/archives') %>" class="inline-flex min-h-11 items-center rounded-full border border-line bg-card/80 px-6 text-sm font-semibold text-ink no-underline transition hover:border-leaf hover:text-leaf">
+            Xem tất cả bài viết
+          </a>
+        </div>
+      </div>
+
+      <div class="mx-auto flex w-full max-w-[230px] flex-col items-center text-center">
+        <span class="inline-flex h-32 w-32 items-center justify-center rounded-full bg-card ring-4 ring-moss md:h-36 md:w-36">
+          <img src="<%- url_for('/images/kiwi-flaticon.png') %>" alt="" class="h-20 w-20 object-contain md:h-24 md:w-24" loading="eager" />
+        </span>
+        <p class="mt-4 font-display text-base font-semibold text-ink">Dương &amp; Đào Family</p>
+        <div class="mt-3 flex items-center justify-center gap-4 text-xs font-semibold text-leaf">
+          <span>Sống</span>
+          <span aria-hidden="true">·</span>
+          <span>Học</span>
+          <span aria-hidden="true">·</span>
+          <span>Đi</span>
+          <span aria-hidden="true">·</span>
+          <span>Yêu</span>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <script>
+    (function () {
+      var hour = new Date().getHours();
+      var greeting, sub;
+      if (hour >= 5 && hour < 11) {
+        greeting = "Chào buổi sáng ☀️";
+        sub = "Nắng vừa lên — pha một tách trà, chọn một bài để đọc nhé.";
+      } else if (hour >= 11 && hour < 14) {
+        greeting = "Chào buổi trưa 🍃";
+        sub = "Nghỉ trưa một chút, đọc vài dòng cho nhẹ đầu nhé.";
+      } else if (hour >= 14 && hour < 18) {
+        greeting = "Chào buổi chiều 🌿";
+        sub = "Chiều êm — ghé vườn chữ của Dương & Đào một lát nhé.";
+      } else if (hour >= 18 && hour < 23) {
+        greeting = "Buổi tối an lành 🌙";
+        sub = "Đèn đã lên — cùng đọc lại một điều gì đó ấm áp nhé.";
+      } else {
+        greeting = "Khuya rồi 🌙";
+        sub = "Còn thức à? Đọc một bài nhẹ nhàng rồi ngủ ngon nhé.";
+      }
+      var title = document.querySelector("[data-greeting]");
+      var subEl = document.querySelector("[data-greeting-sub]");
+      if (title) title.textContent = greeting;
+      if (subEl) subEl.textContent = sub;
+    })();
+  </script>
 
   <% if (latestPost) { %>
-    <section class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
-      <article class="border-b border-line pb-8 lg:border-b-0 lg:border-r lg:pr-8">
-        <a href="<%= latestPost.permalink %>" class="group grid gap-6 no-underline md:grid-cols-[220px_minmax(0,1fr)]">
+    <section class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
+      <article class="group relative overflow-hidden rounded-[24px] border border-line bg-card shadow-leafy transition hover:-translate-y-0.5 hover:shadow-lift">
+        <a href="<%= latestPost.permalink %>" class="grid gap-6 p-6 no-underline md:grid-cols-[240px_minmax(0,1fr)] md:p-8">
           <%
             var latestImage = firstImage(latestPost.content) || url_for('/images/brand-card.svg');
           %>
-          <img src="<%- latestImage %>" alt="" class="aspect-[4/3] w-full rounded-lg object-cover" loading="lazy" />
+          <img src="<%- latestImage %>" alt="" class="aspect-[4/3] w-full rounded-2xl object-cover" loading="lazy" />
           <div>
-            <p class="text-sm font-semibold uppercase text-muted">Mới nhất</p>
-            <h2 class="mt-3 text-2xl font800 leading-tight text-ink group-hover:text-leaf md:text-3xl">
+            <p class="inline-flex items-center rounded-full bg-moss px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-leaf">Mới nhất</p>
+            <h2 class="mt-4 font-display text-2xl font-semibold leading-snug text-ink transition group-hover:text-leaf md:text-3xl">
               <%- latestPost.title %>
             </h2>
             <p class="mt-3 text-sm text-muted">
               <%= date(latestPost.date, 'DD/MM/YYYY') %>
+              · <%= readingTime(latestPost.content) %> phút đọc
               <% if (latestPost.author) { %> · <%= latestPost.author %><% } %>
               <% if (categoryNames(latestPost)) { %> · <%= categoryNames(latestPost) %><% } %>
             </p>
-            <p class="mt-5 text-base leading-8 text-muted">
-              <%= plainExcerpt(latestPost.content, 260) %>
+            <p class="mt-4 text-base leading-8 text-muted">
+              <%= plainExcerpt(latestPost.content, 240) %>
             </p>
-            <span class="mt-5 inline-flex text-sm font-semibold text-leaf">Đọc tiếp</span>
+            <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-leaf">
+              Đọc tiếp
+              <span aria-hidden="true">→</span>
+            </span>
           </div>
         </a>
       </article>
 
-      <aside>
-        <p class="text-sm font-semibold uppercase text-muted">Chuyên mục</p>
+      <aside class="rounded-[24px] border border-line bg-card p-6 shadow-leafy">
+        <p class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-leaf">
+          <%- partial('_partial/leaf', { className: "h-4 w-4" }) %>
+          Chuyên mục
+        </p>
         <div class="mt-4 flex flex-wrap gap-2">
           <% categories.slice(0, 12).forEach(function(category) { %>
-            <a href="<%= url_for(category.path) %>" class="rounded-lg border border-line px-3 py-2 text-sm font-semibold text-ink no-underline transition hover:border-leaf hover:text-leaf">
+            <a href="<%= url_for(category.path) %>" class="rounded-full border border-line bg-paper px-4 py-2 text-sm font-semibold text-ink no-underline transition hover:border-leaf hover:bg-moss hover:text-leaf">
               <%= category.name %>
             </a>
           <% }); %>
@@ -105,25 +163,37 @@
     <section>
       <div class="mb-6 flex items-end justify-between gap-4">
         <div>
-          <p class="text-sm font-semibold uppercase text-muted">Bài viết</p>
-          <h2 class="mt-2 text-2xl font800 text-ink">Đọc gần đây</h2>
+          <p class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-leaf">
+            <%- partial('_partial/leaf', { className: "h-4 w-4" }) %>
+            Bài viết
+          </p>
+          <h2 class="mt-2 font-display text-2xl font-semibold text-ink">Đọc gần đây</h2>
         </div>
-        <a href="<%= url_for('/archives') %>" class="hidden text-sm font-semibold text-leaf no-underline md:inline">Tất cả</a>
+        <a href="<%= url_for('/archives') %>" class="hidden text-sm font-semibold text-leaf no-underline md:inline">Tất cả →</a>
       </div>
 
-      <div class="divide-y divide-line border-y border-line">
+      <div class="grid gap-4">
         <% remainingPosts.slice(0, 9).forEach(function(post) { %>
-          <article>
-            <a href="<%= post.permalink %>" class="group grid gap-3 py-6 no-underline md:grid-cols-[140px_minmax(0,1fr)]">
-              <time class="text-sm text-muted" datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'DD/MM/YYYY') %></time>
-              <div>
-                <h3 class="text-xl font700 leading-8 text-ink group-hover:text-leaf"><%- post.title %></h3>
-                <p class="mt-2 text-sm leading-7 text-muted"><%= plainExcerpt(post.content, 190) %></p>
-                <p class="mt-3 text-xs font-semibold uppercase text-muted">
-                  <% if (post.author) { %><%= post.author %><% } %>
-                  <% if (categoryNames(post)) { %><% if (post.author) { %> · <% } %><%= categoryNames(post) %><% } %>
+          <article class="group rounded-[20px] border border-line bg-card shadow-sm transition hover:-translate-y-0.5 hover:border-leaf/40 hover:shadow-leafy">
+            <a href="<%= post.permalink %>" class="grid gap-2 p-6 no-underline">
+              <p class="flex flex-wrap items-center gap-x-2 text-xs text-muted">
+                <time datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'DD/MM/YYYY') %></time>
+                <span aria-hidden="true">·</span>
+                <span><%= readingTime(post.content) %> phút đọc</span>
+                <% if (post.author) { %>
+                  <span aria-hidden="true">·</span>
+                  <span><%= post.author %></span>
+                <% } %>
+              </p>
+              <h3 class="font-display text-xl font-semibold leading-8 text-ink transition group-hover:text-leaf"><%- post.title %></h3>
+              <p class="text-sm leading-7 text-muted"><%= plainExcerpt(post.content, 190) %></p>
+              <% if (categoryNames(post)) { %>
+                <p class="mt-2 flex flex-wrap gap-2">
+                  <% post.categories.toArray().forEach(function(category) { %>
+                    <span class="rounded-full bg-moss px-3 py-1 text-xs font-semibold text-leaf"><%= category.name %></span>
+                  <% }); %>
                 </p>
-              </div>
+              <% } %>
             </a>
           </article>
         <% }); %>
@@ -134,13 +204,13 @@
   <% if (page.total && page.total > 1) { %>
     <nav class="flex items-center justify-between gap-4" aria-label="Phân trang">
       <% if (page.prev) { %>
-        <a href="<%= url_for(page.prev_link) %>" class="rounded-lg border border-line px-4 py-3 text-sm font-semibold text-ink no-underline hover:border-ink">Trang mới hơn</a>
+        <a href="<%= url_for(page.prev_link) %>" class="rounded-full border border-line bg-card px-5 py-3 text-sm font-semibold text-ink no-underline transition hover:border-leaf hover:text-leaf">← Trang mới hơn</a>
       <% } else { %>
         <span></span>
       <% } %>
       <span class="text-sm text-muted">Trang <%= page.current %> / <%= page.total %></span>
       <% if (page.next) { %>
-        <a href="<%= url_for(page.next_link) %>" class="rounded-lg border border-line px-4 py-3 text-sm font-semibold text-ink no-underline hover:border-ink">Trang cũ hơn</a>
+        <a href="<%= url_for(page.next_link) %>" class="rounded-full border border-line bg-card px-5 py-3 text-sm font-semibold text-ink no-underline transition hover:border-leaf hover:text-leaf">Trang cũ hơn →</a>
       <% } %>
     </nav>
   <% } %>

@@ -20,35 +20,40 @@
 %>
 
 <section class="grid gap-10">
-  <header class="max-w-3xl border-b border-line pb-8">
-    <p class="text-sm font-semibold uppercase text-leaf">Lưu trữ</p>
-    <h1 class="mt-4 text-4xl font800 leading-tight text-ink md:text-5xl">Tất cả bài viết</h1>
+  <header class="max-w-3xl">
+    <p class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-leaf">
+      <%- partial('_partial/leaf', { className: "h-4 w-4" }) %>
+      Lưu trữ
+    </p>
+    <h1 class="mt-4 font-display text-4xl font-semibold leading-tight text-ink md:text-5xl">Tất cả bài viết</h1>
     <p class="mt-5 text-base leading-8 text-muted"><%= totalPosts %> bài viết được giữ lại theo thời gian.</p>
   </header>
 
   <div class="grid gap-10">
     <% yearKeys.forEach(function(year) { %>
       <section class="grid gap-5 md:grid-cols-[120px_minmax(0,1fr)]">
-        <h2 class="text-2xl font800 text-ink"><%= year %></h2>
-        <div class="divide-y divide-line border-y border-line">
-          <% years[year].forEach(function(post) { %>
-            <article>
-              <a href="<%= post.permalink %>" class="group grid gap-2 py-5 no-underline md:grid-cols-[88px_minmax(0,1fr)]">
-                <time class="text-sm text-muted" datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'DD/MM') %></time>
-                <div>
-                  <h3 class="text-lg font700 leading-7 text-ink group-hover:text-leaf"><%- post.title %></h3>
-                  <p class="mt-2 text-sm text-muted">
-                    <% if (post.author) { %><%= post.author %><% } %>
-                    <% if (post.categories && post.categories.length) { %>
-                      <% post.categories.forEach(function(category, index) { %>
-                        <%= (post.author || index > 0) ? " · " : "" %><%= category.name %>
-                      <% }); %>
-                    <% } %>
-                  </p>
-                </div>
-              </a>
-            </article>
-          <% }); %>
+        <h2 class="font-display text-2xl font-semibold text-ink"><%= year %></h2>
+        <div class="overflow-hidden rounded-[20px] border border-line bg-card shadow-sm">
+          <div class="divide-y divide-line">
+            <% years[year].forEach(function(post) { %>
+              <article>
+                <a href="<%= post.permalink %>" class="group grid gap-2 px-5 py-5 no-underline transition hover:bg-moss/50 md:grid-cols-[88px_minmax(0,1fr)]">
+                  <time class="text-sm text-muted" datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'DD/MM') %></time>
+                  <div>
+                    <h3 class="font-display text-lg font-semibold leading-7 text-ink transition group-hover:text-leaf"><%- post.title %></h3>
+                    <p class="mt-2 text-sm text-muted">
+                      <% if (post.author) { %><%= post.author %><% } %>
+                      <% if (post.categories && post.categories.length) { %>
+                        <% post.categories.forEach(function(category, index) { %>
+                          <%= (post.author || index > 0) ? " · " : "" %><%= category.name %>
+                        <% }); %>
+                      <% } %>
+                    </p>
+                  </div>
+                </a>
+              </article>
+            <% }); %>
+          </div>
         </div>
       </section>
     <% }); %>
@@ -57,13 +62,13 @@
   <% if (page.total && page.total > 1) { %>
     <nav class="flex items-center justify-between gap-4" aria-label="Phân trang">
       <% if (page.prev) { %>
-        <a href="<%= url_for(page.prev_link) %>" class="rounded-lg border border-line px-4 py-3 text-sm font-semibold text-ink no-underline hover:border-ink">Trang mới hơn</a>
+        <a href="<%= url_for(page.prev_link) %>" class="rounded-full border border-line bg-card px-5 py-3 text-sm font-semibold text-ink no-underline transition hover:border-leaf hover:text-leaf">← Trang mới hơn</a>
       <% } else { %>
         <span></span>
       <% } %>
       <span class="text-sm text-muted">Trang <%= page.current %> / <%= page.total %></span>
       <% if (page.next) { %>
-        <a href="<%= url_for(page.next_link) %>" class="rounded-lg border border-line px-4 py-3 text-sm font-semibold text-ink no-underline hover:border-ink">Trang cũ hơn</a>
+        <a href="<%= url_for(page.next_link) %>" class="rounded-full border border-line bg-card px-5 py-3 text-sm font-semibold text-ink no-underline transition hover:border-leaf hover:text-leaf">Trang cũ hơn →</a>
       <% } %>
     </nav>
   <% } %>

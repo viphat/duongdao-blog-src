@@ -4,25 +4,37 @@
   var morePosts = allPosts.filter(function(post) {
     return post.path !== page.path;
   }).slice(0, 3);
+
+  function readingTime(content) {
+    if (!content) return 1;
+    var text = content
+      .replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    var words = text ? text.split(" ").length : 0;
+    return Math.max(1, Math.ceil(words / 220));
+  }
 %>
 
 <article class="mx-auto max-w-3xl">
-  <header class="border-b border-line pb-8">
+  <header>
     <nav class="mb-8" aria-label="Đường dẫn">
-      <a href="<%= url_for('/archives') %>" class="text-sm font-semibold text-leaf no-underline">Tất cả bài viết</a>
+      <a href="<%= url_for('/archives') %>" class="inline-flex items-center gap-1.5 text-sm font-semibold text-leaf no-underline">
+        ← Tất cả bài viết
+      </a>
     </nav>
 
     <% if (pageCategories.length) { %>
       <div class="mb-5 flex flex-wrap gap-2">
         <% pageCategories.forEach(function(category) { %>
-          <a href="<%= url_for(category.path) %>" class="rounded-lg border border-line px-3 py-2 text-xs font-semibold uppercase text-muted no-underline transition hover:border-leaf hover:text-leaf">
+          <a href="<%= url_for(category.path) %>" class="rounded-full bg-moss px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-leaf no-underline transition hover:bg-leaf hover:text-white">
             <%= category.name %>
           </a>
         <% }); %>
       </div>
     <% } %>
 
-    <h1 class="text-4xl font800 leading-tight text-ink md:text-5xl"><%= page.title %></h1>
+    <h1 class="font-display text-4xl font-semibold leading-tight text-ink md:text-5xl"><%= page.title %></h1>
     <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted">
       <% if (page.author) { %>
         <span><%= page.author %></span>
@@ -30,26 +42,33 @@
       <% } %>
       <time datetime="<%= date(page.date, 'YYYY-MM-DD') %>"><%= date(page.date, 'DD/MM/YYYY') %></time>
       <span aria-hidden="true">·</span>
+      <span><%= readingTime(page.content) %> phút đọc</span>
+      <span aria-hidden="true">·</span>
       <span data-post-page-views aria-live="polite">Đang tải lượt xem...</span>
     </div>
   </header>
 
-  <div class="content-prose mt-10">
-    <%- page.content %>
+  <div class="mt-8 rounded-[28px] border border-line bg-card p-6 shadow-leafy sm:p-8 md:p-10">
+    <div class="content-prose">
+      <%- page.content %>
+    </div>
   </div>
 
-  <section class="comments-shell mt-14 border-t border-line pt-8 text-ink" data-comments-section>
+  <section class="comments-shell mt-12 text-ink" data-comments-section>
     <div class="comments-head flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
       <div>
-        <h2 class="text-2xl font800 leading-8 text-ink md:text-3xl">Bình luận</h2>
+        <h2 class="inline-flex items-center gap-2.5 font-display text-2xl font-semibold leading-8 text-ink md:text-3xl">
+          <%- partial('_partial/leaf', { className: "h-5 w-5 text-leaf" }) %>
+          Bình luận
+        </h2>
         <p class="mt-2 text-sm leading-6 text-muted" data-comments-status>Đang tải bình luận...</p>
       </div>
-      <button type="button" class="comments-author-button inline-flex min-h-[42px] items-center justify-center rounded-lg border border-line bg-white px-4 text-sm font700 leading-none text-ink transition hover:border-leaf hover:text-leaf" data-comments-author-toggle>Chế độ tác giả</button>
+      <button type="button" class="comments-author-button inline-flex min-h-[42px] items-center justify-center rounded-full border border-line bg-card px-4 text-sm font700 leading-none text-ink transition hover:border-leaf hover:text-leaf" data-comments-author-toggle>Chế độ tác giả</button>
     </div>
 
     <div class="comments-list mt-6 grid gap-4" data-comments-list></div>
 
-    <form class="comments-form mt-8 grid gap-4 rounded-lg border border-line bg-white p-5" data-comments-form>
+    <form class="comments-form mt-8 grid gap-4 rounded-[24px] border border-line bg-card p-5 shadow-leafy sm:p-6" data-comments-form>
       <div class="comments-honeypot" aria-hidden="true" hidden>
         <label for="comment-website">Website</label>
         <input id="comment-website" name="website" type="text" tabindex="-1" autocomplete="off" />
@@ -57,29 +76,32 @@
 
       <div class="comments-field grid gap-2">
         <label class="comments-label block text-sm font800 text-ink" for="comment-name">Tên của bạn</label>
-        <input id="comment-name" class="comments-input block min-h-[46px] w-full rounded-lg border border-line bg-white px-3 py-2 text-base leading-6 text-ink outline-none transition focus:border-leaf focus:ring-4 focus:ring-[#16835f24]" name="name" type="text" maxlength="80" autocomplete="name" required />
+        <input id="comment-name" class="comments-input block min-h-[46px] w-full rounded-xl border border-line bg-paper px-3 py-2 text-base leading-6 text-ink outline-none transition focus:border-leaf focus:ring-4 focus:ring-[#35714a1f]" name="name" type="text" maxlength="80" autocomplete="name" required />
       </div>
 
       <div class="comments-field grid gap-2">
         <label class="comments-label block text-sm font800 text-ink" for="comment-body">Bình luận</label>
-        <textarea id="comment-body" class="comments-textarea block min-h-36 w-full resize-y rounded-lg border border-line bg-white px-3 py-2 text-base leading-7 text-ink outline-none transition focus:border-leaf focus:ring-4 focus:ring-[#16835f24]" name="body" maxlength="2000" rows="5" required></textarea>
+        <textarea id="comment-body" class="comments-textarea block min-h-36 w-full resize-y rounded-xl border border-line bg-paper px-3 py-2 text-base leading-7 text-ink outline-none transition focus:border-leaf focus:ring-4 focus:ring-[#35714a1f]" name="body" maxlength="2000" rows="5" required></textarea>
       </div>
 
       <div class="comments-form-footer flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p class="m-0 text-sm leading-6 text-muted">Bình luận sẽ hiển thị sau khi tác giả duyệt.</p>
-        <button type="submit" class="comments-submit inline-flex min-h-[42px] items-center justify-center rounded-lg border border-leaf bg-leaf px-4 text-sm font700 leading-none text-white transition hover:bg-[#11684b]">Gửi bình luận</button>
+        <button type="submit" class="comments-submit inline-flex min-h-[42px] items-center justify-center rounded-full border border-leaf bg-leaf px-5 text-sm font700 leading-none text-white transition hover:bg-pine">Gửi bình luận</button>
       </div>
     </form>
   </section>
 
   <% if (morePosts.length) { %>
-    <aside class="mt-14 border-t border-line pt-8">
-      <p class="text-sm font-semibold uppercase text-muted">Đọc tiếp</p>
-      <div class="mt-4 divide-y divide-line">
+    <aside class="mt-12">
+      <p class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-leaf">
+        <%- partial('_partial/leaf', { className: "h-4 w-4" }) %>
+        Đọc tiếp
+      </p>
+      <div class="mt-4 grid gap-3">
         <% morePosts.forEach(function(post) { %>
-          <a href="<%= post.permalink %>" class="group block py-4 no-underline">
-            <h2 class="text-lg font700 leading-7 text-ink group-hover:text-leaf"><%- post.title %></h2>
-            <p class="mt-1 text-sm text-muted"><%= date(post.date, 'DD/MM/YYYY') %></p>
+          <a href="<%= post.permalink %>" class="group block rounded-[20px] border border-line bg-card p-5 no-underline shadow-sm transition hover:-translate-y-0.5 hover:border-leaf/40 hover:shadow-leafy">
+            <h2 class="font-display text-lg font-semibold leading-7 text-ink transition group-hover:text-leaf"><%- post.title %></h2>
+            <p class="mt-1 text-sm text-muted"><%= date(post.date, 'DD/MM/YYYY') %> · <%= readingTime(post.content) %> phút đọc</p>
           </a>
         <% }); %>
       </div>
